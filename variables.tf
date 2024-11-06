@@ -6,6 +6,11 @@ variable "org_id" {
   type = string
 }
 
+variable "git_repo" {
+  type = string
+  default = "https://github.com/kesokaj/gcp-tf-workstation"
+}
+
 variable "firewall_config" {
   type = map(any)
   description = "Firewall rules in VPC"

@@ -1,3 +1,15 @@
+resource "google_service_account" "x" {
+  project = var.project_id
+  account_id   = "cloud-workstation-user-sa"
+  display_name = "Cloud Workstations User"
+}
+
+resource "google_service_account_iam_member" "x" {
+  service_account_id = google_service_account.x.name
+  role               = "roles/owner"
+  member             = "serviceAccount:${google_service_account.x.email}"
+}
+
 resource "google_workstations_workstation_cluster" "x" {
   provider = google-beta
   workstation_cluster_id = "cluster-${var.alias}"
@@ -23,6 +35,7 @@ resource "google_workstations_workstation_config" "x" {
       boot_disk_size_gb           = 64
       disable_public_ip_addresses = true
       disable_ssh                 = false
+      service_account             = google_service_account.x.email 
       shielded_instance_config {
         enable_secure_boot = true
         enable_vtpm        = true

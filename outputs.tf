@@ -17,3 +17,11 @@ output "alias" {
 output "alias_id" {
   value = module.base.alias_id
 }
+
+output "docker_build_syntax" {
+  value = "docker build -t ${module.cicd.repository_url} ."
+}
+
+output "docker_push_syntax" {
+  value = "docker push ${module.cicd.repository_url}"
+}

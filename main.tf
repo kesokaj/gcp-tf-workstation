@@ -17,8 +17,18 @@ module "network" {
   logs_config = var.logs_config
 }
 
-module "workstation" {
+module "cicd" {
   depends_on = [ module.network ]
+  source = "./modules/bootstrap/cicd"
+  alias = module.base.alias
+  project_id = module.base.project_id
+  project_number = module.base.project_number
+  region = element(module.network.subnet, 0)
+  git_repo = var.git_repo
+}
+
+module "workstation" {
+  depends_on = [ module.cicd ]
   source = "./modules/bootstrap/workstation"
   alias = module.base.alias
   project_id = module.base.project_id
