@@ -38,3 +38,8 @@ runuser -l user -c "/opt/code-oss/bin/codeoss-cloudworkstations --install-extens
 
 runuser -l user -c "curl -sS https://webi.sh/k9s | sh"
 runuser -l user -c "source ~/.config/envman/PATH.env"
+runuser -l user -c "echo 'source <(kubectl completion bash)' >>~/.bashrc"
+runuser -l user -c "echo 'complete -o default -F __start_kubectl k' >>~/.bashrc"
+runuser -l user -c "source ~/.bashrc"
+runuser -l user -c "if [ ! -f /home/user/.ssh/id_ed25519 ]; then ssh-keygen -t ed25519 -C cloud-workstation-user -f /home/user/.ssh/id_ed25519; fi"
+

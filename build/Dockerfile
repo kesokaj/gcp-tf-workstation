@@ -11,7 +11,15 @@ RUN curl https://apt.releases.hashicorp.com/gpg | gpg --dearmor -o /usr/share/ke
 RUN curl https://baltocdn.com/helm/signing.asc | gpg --dearmor | tee /usr/share/keyrings/helm.gpg && \
     echo "deb [arch=${ARCH} signed-by=/usr/share/keyrings/helm.gpg] https://baltocdn.com/helm/stable/debian/ all main" | tee /etc/apt/sources.list.d/helm-stable-debian.list
 
-RUN apt-get update && apt-get install -y terraform helm pwgen
+RUN apt-get update && apt-get install -y terraform \
+    helm \
+    pwgen \
+    tldr \
+    htop \
+    nmon \
+    mtr \
+    iproute2 \
+    pv
 
 COPY script/*.sh /etc/workstation-startup.d/
 RUN chmod +x /etc/workstation-startup.d/*.sh
