@@ -4,12 +4,11 @@ resource "google_service_account" "x" {
   display_name = "Cloud Workstations User"
 }
 
-resource "google_service_account_iam_member" "x" {
-  service_account_id = google_service_account.x.name
-  role               = "roles/owner"
-  member             = "serviceAccount:${google_service_account.x.email}"
+resource "google_project_iam_member" "x" {
+  project = var.project_id
+  role    = "roles/owner"
+  member  = "serviceAccount:${google_service_account.x.email}"
 }
-
 resource "google_workstations_workstation_cluster" "x" {
   provider = google-beta
   workstation_cluster_id = "cluster-${var.alias}"
