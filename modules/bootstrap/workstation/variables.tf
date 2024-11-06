@@ -17,3 +17,8 @@ variable "subnet_id" {
 variable "region" {
   type = string
 }
+
+variable "container_image" {
+  type = string
+  
+}

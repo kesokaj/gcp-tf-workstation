@@ -25,3 +25,7 @@ output "docker_build_syntax" {
 output "docker_push_syntax" {
   value = "docker push ${module.cicd.repository_url}"
 }
+
+output "artifact_registry_login" {
+  value = "gcloud auth configure-docker ${element(module.network.subnet, 0)}-docker.pkg.dev"
+}

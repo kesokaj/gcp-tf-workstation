@@ -35,6 +35,7 @@ module "workstation" {
   region = element(module.network.subnet, 0)
   network = module.network.vpc_id
   subnet_id = element(module.network.subnet_id, 0)
+  container_image = module.cicd.repository_url
 }
 
 module "post" {
