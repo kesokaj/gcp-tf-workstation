@@ -21,5 +21,12 @@ RUN apt-get update && apt-get install -y terraform \
     iproute2 \
     pv
 
+# Permit X11 forwarding using only IPv4
+RUN cat >> /etc/ssh/sshd_config <<-EOF
+
+AddressFamily inet
+X11Forwarding yes
+EOF
+
 COPY script/*.sh /etc/workstation-startup.d/
 RUN chmod +x /etc/workstation-startup.d/*.sh
